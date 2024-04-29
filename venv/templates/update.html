@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualizar Funcionário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Atualizar Funcionário</h1>
+        <form action="/update" method="post">
+            <input type="hidden" name="id" value="{{ funcionario.id }}">
+            Primeiro Nome: <input type="text" name="primeiro_nome" value="{{ funcionario.primeiro_nome }}" required><br>
+            Sobrenome: <input type="text" name="sobrenome" value="{{ funcionario.sobrenome }}" required><br>
+            Data de Admissão: <input type="date" name="data_admissao" value="{{ funcionario.data_admissao }}" required><br>
+            Status (1 para ativo, 0 para inativo): <input type="text" name="status_funcionario" value="{{ funcionario.status_funcionario }}" required><br>
+            <input type="submit" value="Atualizar">
+        </form>
+        <button onclick="window.location.href='/'">Voltar</button>
+    </div>
+</body>
+</html>

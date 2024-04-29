@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Informações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div id="form-employee" class="form-section">
+            <h1>Adicionar/Atualizar Funcionário</h1>
+            <form action="/funcionario" method="post">
+                <input type="hidden" name="id" id="employee-id"> 
+                Primeiro Nome: <input type="text" name="primeiro_nome" id="primeiro-nome" required><br>
+                Sobrenome: <input type="text" name="sobrenome" id="sobrenome" required><br>
+                Data de Admissão: <input type="date" name="data_admissao" id="data-admissao" required><br>
+                Status (1 para ativo, 0 para inativo): <input type="text" name="status_funcionario" id="status-funcionario" required><br>
+                <input type="submit" id="add-employee" class="nav-button" value="Salvar" />
+            </form>
+        </div>
+        <div id="list-employees" class="form-section">
+            <h1>Lista de Funcionários</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Primeiro Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Data de Admissão</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for funcionario in funcionarios %}
+                    <tr>
+                        <td>{{ funcionario[0] }}</td>
+                        <td>{{ funcionario[1] }}</td>
+                        <td>{{ funcionario[2] }}</td>
+                        <td>{{ funcionario[3] }}</td>
+                        <td>{{ funcionario[4] }}</td>
+                        <td>
+                            <button type="button" onclick="preencherFormulario('{{ funcionario[0] }}', '{{ funcionario[1] }}', '{{ funcionario[2] }}', '{{ funcionario[3] }}', '{{ funcionario[4] }}')">Atualizar</button>
+                            <form action="/delete/{{ funcionario[0] }}" method="post" style="display:inline;">
+                                <button type="submit">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='script/app.js') }}"></script> 
+</body>
+</html>
